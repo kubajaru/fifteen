@@ -13,6 +13,18 @@ public class Board {
         getZeroCords();
     }
 
+    public void printBoard() {
+        for (int r = 0; r < this.board.size(); r++) {
+            for (int c = 0; c < this.board.get(r).size(); c++) {
+                if(this.board.get(r).get(c) <10)
+                    System.out.print(this.board.get(r).get(c) + "  ");
+                else
+                System.out.print(this.board.get(r).get(c) + " ");
+            }
+            System.out.println();
+        }
+    }
+
     private void getZeroCords() {
         for (int r = 0; r < this.board.size(); r++) {
             for (int c = 0; c < this.board.get(r).size(); c++) {
