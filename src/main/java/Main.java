@@ -22,7 +22,7 @@ public class Main {
         BFS solver = new BFS();
         Board solvedBoard = solver.solveBoard(board);
         solvedBoard.printBoard();
-
+        System.out.println(solvedBoard.getSteps());
 
     }
     private static List<Integer> getRow() {
