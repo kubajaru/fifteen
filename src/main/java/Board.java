@@ -7,6 +7,9 @@ public class Board {
     private int zeroFieldC;
     private String steps = "";
 
+    public String getSteps() {
+        return steps;
+    }
 
     public Board(List<List<Integer>> board) {
         this.board = board;
@@ -25,12 +28,22 @@ public class Board {
         }
     }
 
-    private void getZeroCords() {
+    public boolean isSolved(){
         for (int r = 0; r < this.board.size(); r++) {
+            for (int c = 0; c < this.board.get(r).size(); c++) {
+
+            }
+        }
+        return false;
+    }
+
+    private void getZeroCords() {
+        fff: for (int r = 0; r < this.board.size(); r++) {
             for (int c = 0; c < this.board.get(r).size(); c++) {
                 if (this.board.get(r).get(c) == 0) {
                     this.zeroFieldR = r;
                     this.zeroFieldC = c;
+                    break fff;
                 }
             }
         }
@@ -56,12 +69,20 @@ public class Board {
         this.steps = this.steps.concat("U ");
     }
 
+    public boolean canMoveUp(){
+        return zeroFieldR > 0;
+    }
+
     public void moveDown() {
         int downValue = getValue(this.zeroFieldR + 1, this.zeroFieldC);
         setValue(this.zeroFieldR + 1, this.zeroFieldC, 0);
         setValue(this.zeroFieldR, this.zeroFieldC, downValue);
         this.zeroFieldR = this.zeroFieldR + 1;
         this.steps = this.steps.concat("D ");
+    }
+
+    public boolean canMoveDown() {
+        return zeroFieldR<this.board.size();
     }
 
     public void moveLeft() {
@@ -72,12 +93,20 @@ public class Board {
         this.steps = this.steps.concat("L ");
     }
 
+    public boolean canMoveLeft(){
+        return zeroFieldC>0;
+    }
+
     public void moveRight() {
         int rightValue = getValue(this.zeroFieldR, this.zeroFieldC + 1);
         setValue(this.zeroFieldR, this.zeroFieldC + 1, 0);
         setValue(this.zeroFieldR, this.zeroFieldC, rightValue);
         this.zeroFieldC = this.zeroFieldC + 1;
         this.steps = this.steps.concat("R ");
+    }
+
+    public boolean canMoveRight(){
+        return zeroFieldC<this.board.get(0).size();
     }
 }
 
