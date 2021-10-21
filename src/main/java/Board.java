@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Board {
@@ -9,6 +10,10 @@ public class Board {
 
     public String getSteps() {
         return steps;
+    }
+
+    public void setSteps(String steps) {
+        this.steps = steps;
     }
 
     public Board(List<List<Integer>> board) {
@@ -29,12 +34,8 @@ public class Board {
     }
 
     public boolean isSolved(){
-        for (int r = 0; r < this.board.size(); r++) {
-            for (int c = 0; c < this.board.get(r).size(); c++) {
-
-            }
-        }
-        return false;
+        return this.board.get(0).get(0) == 1 & this.board.get(0).get(1) == 2 &
+                this.board.get(1).get(0) == 3 & this.board.get(1).get(1) == 0;
     }
 
     private void getZeroCords() {
@@ -82,7 +83,7 @@ public class Board {
     }
 
     public boolean canMoveDown() {
-        return zeroFieldR<this.board.size();
+        return zeroFieldR < this.board.size() - 1;
     }
 
     public void moveLeft() {
@@ -94,7 +95,7 @@ public class Board {
     }
 
     public boolean canMoveLeft(){
-        return zeroFieldC>0;
+        return zeroFieldC > 0;
     }
 
     public void moveRight() {
@@ -106,7 +107,27 @@ public class Board {
     }
 
     public boolean canMoveRight(){
-        return zeroFieldC<this.board.get(0).size();
+        return zeroFieldC < this.board.get(0).size() - 1;
+    }
+
+    @Override
+    protected Board clone() {
+        List<List<Integer>> temp = new ArrayList<>();
+        for (int i = 0; i < this.board.size(); i++) {
+            temp.add(new ArrayList<>());
+        }
+
+        for (int r = 0; r < this.board.size(); r++) {
+            for (int c = 0; c < this.board.get(r).size(); c++) {
+                temp.get(r).add(this.board.get(r).get(c));
+            }
+        }
+
+        Board clonedBoard = new Board(temp);
+
+        clonedBoard.setSteps(this.steps);
+
+        return clonedBoard;
     }
 }
 

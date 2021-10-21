@@ -19,6 +19,11 @@ public class Main {
         Board board = new Board(temp);
         board.printBoard();
 
+        BFS solver = new BFS();
+        Board solvedBoard = solver.solveBoard(board);
+        solvedBoard.printBoard();
+
+
     }
     private static List<Integer> getRow() {
         Scanner scan = new Scanner(System.in);
