@@ -22,6 +22,7 @@ public class Main {
         //BFS solver = new BFS();
         DFS solver = new DFS();
         Board solvedBoard = solver.solveBoard(board);
+        System.out.println("=================");
         solvedBoard.printBoard();
         System.out.println(solvedBoard.getSteps());
 

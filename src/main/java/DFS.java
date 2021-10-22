@@ -17,21 +17,9 @@ public class DFS {
 
             visited.add(board);
 
-            if (board.canMoveUp()) {
-                Board newBoard = board.clone();
-                newBoard.moveUp();
-                System.out.println("=================");
-                newBoard.printBoard();
-                if (!visited.contains(newBoard)) {
-                    stack.push(newBoard);
-                }
-            }
-
             if (board.canMoveDown()) {
                 Board newBoard = board.clone();
                 newBoard.moveDown();
-                System.out.println("=================");
-                newBoard.printBoard();
                 if (!visited.contains(newBoard)) {
                     stack.push(newBoard);
                 }
@@ -39,8 +27,6 @@ public class DFS {
             if (board.canMoveLeft()) {
                 Board newBoard = board.clone();
                 newBoard.moveLeft();
-                System.out.println("=================");
-                newBoard.printBoard();
                 if (!visited.contains(newBoard)) {
                     stack.push(newBoard);
                 }
@@ -48,8 +34,13 @@ public class DFS {
             if (board.canMoveRight()) {
                 Board newBoard = board.clone();
                 newBoard.moveRight();
-                System.out.println("=================");
-                newBoard.printBoard();
+                if (!visited.contains(newBoard)) {
+                    stack.push(newBoard);
+                }
+            }
+            if (board.canMoveUp()) {
+                Board newBoard = board.clone();
+                newBoard.moveUp();
                 if (!visited.contains(newBoard)) {
                     stack.push(newBoard);
                 }
