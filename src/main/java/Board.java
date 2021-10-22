@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Board {
 
@@ -128,6 +129,19 @@ public class Board {
         clonedBoard.setSteps(this.steps);
 
         return clonedBoard;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Board board1 = (Board) o;
+        return zeroFieldR == board1.zeroFieldR && zeroFieldC == board1.zeroFieldC && board.equals(board1.board) && steps.equals(board1.steps);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(board, zeroFieldR, zeroFieldC, steps);
     }
 }
 

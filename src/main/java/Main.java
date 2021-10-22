@@ -19,7 +19,8 @@ public class Main {
         Board board = new Board(temp);
         board.printBoard();
 
-        BFS solver = new BFS();
+        //BFS solver = new BFS();
+        DFS solver = new DFS();
         Board solvedBoard = solver.solveBoard(board);
         solvedBoard.printBoard();
         System.out.println(solvedBoard.getSteps());
