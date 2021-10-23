@@ -74,4 +74,46 @@ class BoardTest {
         Assertions.assertEquals(board.getBoard().get(0).get(1), 0);
     }
 
+    @Test
+    void testIsSolved() {
+        List<List<Integer>> temp = new ArrayList<>();
+
+        temp.add(new ArrayList<>());
+        temp.add(new ArrayList<>());
+
+        temp.get(0).add(1); temp.get(0).add(2);
+        temp.get(1).add(3); temp.get(1).add(0);
+
+        Board board = new Board(temp);
+        Assertions.assertTrue(board.isSolved());
+    }
+
+    @Test
+    void testIsNotSolved() {
+        List<List<Integer>> temp = new ArrayList<>();
+
+        temp.add(new ArrayList<>());
+        temp.add(new ArrayList<>());
+
+        temp.get(0).add(2); temp.get(0).add(2);
+        temp.get(1).add(0); temp.get(1).add(3);
+
+        Board board = new Board(temp);
+        Assertions.assertFalse(board.isSolved());
+    }
+
+    @Test
+    void testIsNotSolvedZeroCorrect() {
+        List<List<Integer>> temp = new ArrayList<>();
+
+        temp.add(new ArrayList<>());
+        temp.add(new ArrayList<>());
+
+        temp.get(0).add(2); temp.get(0).add(1);
+        temp.get(1).add(3); temp.get(1).add(0);
+
+        Board board = new Board(temp);
+        Assertions.assertFalse(board.isSolved());
+    }
+
 }

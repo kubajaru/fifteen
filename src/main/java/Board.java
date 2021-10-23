@@ -35,8 +35,18 @@ public class Board {
     }
 
     public boolean isSolved(){
-        return this.board.get(0).get(0) == 1 & this.board.get(0).get(1) == 2 &
-                this.board.get(1).get(0) == 3 & this.board.get(1).get(1) == 0;
+        int value = 1;
+        boolean isSolved = true;
+        if (this.board.get(this.board.size() - 1).get(this.board.get(0).size() - 1) != 0) return false;
+        outerLoop: for (int r = 0; r < this.board.size(); r++) {
+            for (int c = 0; c < this.board.get(r).size(); c++, value++) {
+                if ( r != this.board.size() - 1 & c != this.board.get(0).size() - 1 & this.board.get(r).get(c) != value) {
+                    isSolved = false;
+                    break outerLoop;
+                }
+            }
+        }
+        return isSolved;
     }
 
     private void getZeroCords() {
