@@ -17,6 +17,13 @@ public class DFS {
 
             visited.add(board);
 
+            if (board.canMoveUp()) {
+                Board newBoard = board.clone();
+                newBoard.moveUp();
+                if (!visited.contains(newBoard)) {
+                    stack.push(newBoard);
+                }
+            }
             if (board.canMoveDown()) {
                 Board newBoard = board.clone();
                 newBoard.moveDown();
@@ -34,13 +41,6 @@ public class DFS {
             if (board.canMoveRight()) {
                 Board newBoard = board.clone();
                 newBoard.moveRight();
-                if (!visited.contains(newBoard)) {
-                    stack.push(newBoard);
-                }
-            }
-            if (board.canMoveUp()) {
-                Board newBoard = board.clone();
-                newBoard.moveUp();
                 if (!visited.contains(newBoard)) {
                     stack.push(newBoard);
                 }
