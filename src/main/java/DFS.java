@@ -1,48 +1,53 @@
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Stack;
 
 public class DFS {
-    private final Stack<Board> stack = new Stack<>();
+    private final LinkedList<Board> stack = new LinkedList<>();
     private final HashSet<Board> visited = new HashSet<>();
 
     public Board solveBoard(Board boardToSolve) {
-        stack.push(boardToSolve);
+        stack.add(boardToSolve);
+        visited.add(boardToSolve);
 
         while (!stack.isEmpty()) {
-            Board board = stack.pop();
+            Board board = stack.getLast();
+            stack.removeLast();
 
             if (board.isSolved()) {
                 return board;
             }
 
-            visited.add(board);
-
             if (board.canMoveUp()) {
                 Board newBoard = board.clone();
                 newBoard.moveUp();
                 if (!visited.contains(newBoard)) {
-                    stack.push(newBoard);
+                    stack.add(newBoard);
+                    visited.add(newBoard);
                 }
             }
             if (board.canMoveDown()) {
                 Board newBoard = board.clone();
                 newBoard.moveDown();
                 if (!visited.contains(newBoard)) {
-                    stack.push(newBoard);
+                    stack.add(newBoard);
+                    visited.add(newBoard);
                 }
             }
             if (board.canMoveLeft()) {
                 Board newBoard = board.clone();
                 newBoard.moveLeft();
                 if (!visited.contains(newBoard)) {
-                    stack.push(newBoard);
+                    stack.add(newBoard);
+                    visited.add(newBoard);
                 }
             }
             if (board.canMoveRight()) {
                 Board newBoard = board.clone();
                 newBoard.moveRight();
                 if (!visited.contains(newBoard)) {
-                    stack.push(newBoard);
+                    stack.add(newBoard);
+                    visited.add(newBoard);
                 }
             }
         }

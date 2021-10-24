@@ -8,81 +8,66 @@ class BoardTest {
 
     @Test
     void testMoveUp() {
-        List<List<Integer>> temp = new ArrayList<>();
+        int[][] temp = new int[2][2];
 
-        temp.add(new ArrayList<>());
-        temp.add(new ArrayList<>());
-
-        temp.get(0).add(1); temp.get(0).add(2);
-        temp.get(1).add(0); temp.get(1).add(3);
+        temp[0][0] = 1; temp[0][1] = 2;
+        temp[1][0] = 0; temp[1][1] = 3;
 
         Board board = new Board(temp);
         board.moveUp();
 
-        Assertions.assertEquals(board.getBoard().get(0).get(0), 0);
-        Assertions.assertEquals(board.getBoard().get(1).get(0), 1);
+        Assertions.assertEquals(board.getBoard()[0][0], 0);
+        Assertions.assertEquals(board.getBoard()[1][0], 1);
     }
 
     @Test
     void testMoveDown() {
-        List<List<Integer>> temp = new ArrayList<>();
+        int[][] temp = new int[2][2];
 
-        temp.add(new ArrayList<>());
-        temp.add(new ArrayList<>());
-
-        temp.get(0).add(0); temp.get(0).add(2);
-        temp.get(1).add(1); temp.get(1).add(3);
+        temp[0][0] = 0; temp[0][1] = 2;
+        temp[1][0] = 1; temp[1][1] = 3;
 
         Board board = new Board(temp);
         board.moveDown();
 
-        Assertions.assertEquals(board.getBoard().get(0).get(0), 1);
-        Assertions.assertEquals(board.getBoard().get(1).get(0), 0);
+        Assertions.assertEquals(board.getBoard()[0][0], 1);
+        Assertions.assertEquals(board.getBoard()[1][0], 0);
     }
 
     @Test
     void testMoveLeft() {
-        List<List<Integer>> temp = new ArrayList<>();
+        int[][] temp = new int[2][2];
 
-        temp.add(new ArrayList<>());
-        temp.add(new ArrayList<>());
-
-        temp.get(0).add(1); temp.get(0).add(0);
-        temp.get(1).add(2); temp.get(1).add(3);
+        temp[0][0] = 1; temp[0][1] = 0;
+        temp[1][0] = 2; temp[1][1] = 3;
 
         Board board = new Board(temp);
         board.moveLeft();
 
-        Assertions.assertEquals(board.getBoard().get(0).get(0), 0);
-        Assertions.assertEquals(board.getBoard().get(0).get(1), 1);
+        Assertions.assertEquals(board.getBoard()[0][0], 0);
+        Assertions.assertEquals(board.getBoard()[0][1], 1);
     }
 
     @Test
     void testMoveRight() {
-        List<List<Integer>> temp = new ArrayList<>();
+        int[][] temp = new int[2][2];
 
-        temp.add(new ArrayList<>());
-        temp.add(new ArrayList<>());
-
-        temp.get(0).add(0); temp.get(0).add(1);
-        temp.get(1).add(2); temp.get(1).add(3);
+        temp[0][0] = 0; temp[0][1] = 1;
+        temp[1][0] = 2; temp[1][1] = 3;
 
         Board board = new Board(temp);
         board.moveRight();
 
-        Assertions.assertEquals(board.getBoard().get(0).get(0), 1);
-        Assertions.assertEquals(board.getBoard().get(0).get(1), 0);
+        Assertions.assertEquals(board.getBoard()[0][0], 1);
+        Assertions.assertEquals(board.getBoard()[0][1], 0);
     }
 
     @Test
     void testIsSolved() {
-        List<List<Integer>> temp = new ArrayList<>();
+        int[][] temp = new int[2][2];
 
-        temp.add(new ArrayList<>());
-        temp.add(new ArrayList<>());
-
-        temp.get(0).add(1); temp.get(0).add(2);
-        temp.get(1).add(3); temp.get(1).add(0);
+        temp[0][0] = 1; temp[0][1] = 2;
+        temp[1][0] = 3; temp[1][1] = 0;
 
         Board board = new Board(temp);
         Assertions.assertTrue(board.isSolved());
@@ -90,13 +75,10 @@ class BoardTest {
 
     @Test
     void testIsNotSolved() {
-        List<List<Integer>> temp = new ArrayList<>();
+        int[][] temp = new int[2][2];
 
-        temp.add(new ArrayList<>());
-        temp.add(new ArrayList<>());
-
-        temp.get(0).add(2); temp.get(0).add(2);
-        temp.get(1).add(0); temp.get(1).add(3);
+        temp[0][0] = 1; temp[0][1] = 2;
+        temp[1][0] = 0; temp[1][1] = 3;
 
         Board board = new Board(temp);
         Assertions.assertFalse(board.isSolved());
@@ -104,16 +86,27 @@ class BoardTest {
 
     @Test
     void testIsNotSolvedZeroCorrect() {
-        List<List<Integer>> temp = new ArrayList<>();
+        int[][] temp = new int[2][2];
 
-        temp.add(new ArrayList<>());
-        temp.add(new ArrayList<>());
-
-        temp.get(0).add(2); temp.get(0).add(1);
-        temp.get(1).add(3); temp.get(1).add(0);
+        temp[0][0] = 2; temp[0][1] = 1;
+        temp[1][0] = 3; temp[1][1] = 0;
 
         Board board = new Board(temp);
         Assertions.assertFalse(board.isSolved());
+    }
+
+    @Test
+    void testGetZeroCords() {
+        int[][] temp = new int[2][2];
+
+        temp[0][0] = 2; temp[0][1] = 1;
+        temp[1][0] = 3; temp[1][1] = 0;
+
+        Board board = new Board(temp);
+        Assertions.assertEquals(board.getValue(1,1), 0);
+        Assertions.assertTrue(board.canMoveUp());
+        board.moveUp();
+        Assertions.assertFalse(board.canMoveUp());
     }
 
 }

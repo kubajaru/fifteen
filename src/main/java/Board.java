@@ -1,34 +1,48 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 public class Board {
 
-    private final List<List<Integer>> board;
+    private final int[][] board;
     private int zeroFieldR;
     private int zeroFieldC;
-    private String steps = "";
+    private List<Integer> steps = new ArrayList<>();
 
     public String getSteps() {
+        String steps = "";
+        for (Integer step:
+             this.steps) {
+            if (step == 1) {
+                steps = steps.concat("U ");
+            } else if (step == 2) {
+                steps = steps.concat("D ");
+            } else if (step == 3) {
+                steps = steps.concat("L ");
+            }else if (step == 4) {
+                steps = steps.concat("R ");
+            }
+        }
         return steps;
     }
 
-    public void setSteps(String steps) {
+    public void setSteps(List<Integer> steps) {
         this.steps = steps;
     }
 
-    public Board(List<List<Integer>> board) {
+    public Board(int[][] board) {
         this.board = board;
         getZeroCords();
     }
 
     public void printBoard() {
-        for (int r = 0; r < this.board.size(); r++) {
-            for (int c = 0; c < this.board.get(r).size(); c++) {
-                if(this.board.get(r).get(c) <10)
-                    System.out.print(this.board.get(r).get(c) + "  ");
+        for (int r = 0; r < this.board.length; r++) {
+            for (int c = 0; c < this.board[0].length; c++) {
+                if(this.board[r][c] <10)
+                    System.out.print(this.board[r][c] + "  ");
                 else
-                System.out.print(this.board.get(r).get(c) + " ");
+                System.out.print(this.board[r][c] + " ");
             }
             System.out.println();
         }
@@ -37,10 +51,10 @@ public class Board {
     public boolean isSolved(){
         int value = 1;
         boolean isSolved = true;
-        if (this.board.get(this.board.size() - 1).get(this.board.get(0).size() - 1) != 0) return false;
-        outerLoop: for (int r = 0; r < this.board.size(); r++) {
-            for (int c = 0; c < this.board.get(r).size(); c++, value++) {
-                if ( r != this.board.size() - 1 & c != this.board.get(0).size() - 1 & this.board.get(r).get(c) != value) {
+        if (this.board[this.board.length - 1][this.board[0].length - 1] != 0) return false;
+        outerLoop: for (int r = 0; r < this.board.length; r++) {
+            for (int c = 0; c < this.board[0].length; c++, value++) {
+                if ( r != this.board.length - 1 & c != this.board[0].length - 1 & this.board[r][c] != value) {
                     isSolved = false;
                     break outerLoop;
                 }
@@ -50,9 +64,9 @@ public class Board {
     }
 
     private void getZeroCords() {
-        fff: for (int r = 0; r < this.board.size(); r++) {
-            for (int c = 0; c < this.board.get(r).size(); c++) {
-                if (this.board.get(r).get(c) == 0) {
+        fff: for (int r = 0; r < this.board.length; r++) {
+            for (int c = 0; c < this.board[0].length; c++) {
+                if (this.board[r][c] == 0) {
                     this.zeroFieldR = r;
                     this.zeroFieldC = c;
                     break fff;
@@ -61,16 +75,16 @@ public class Board {
         }
     }
     
-    public List<List<Integer>> getBoard() {
+    public int[][] getBoard() {
         return this.board;
     }
 
-    private Integer getValue(int r, int c) {
-        return this.board.get(r).get(c);
+    public Integer getValue(int r, int c) {
+        return this.board[r][c];
     }
 
     private void setValue(int r, int c, int value) {
-        this.board.get(r).set(c, value);
+        this.board[r][c] = value;
     }
 
     public void moveUp() {
@@ -78,7 +92,7 @@ public class Board {
         setValue(this.zeroFieldR - 1, this.zeroFieldC, 0);
         setValue(this.zeroFieldR, this.zeroFieldC, upValue);
         this.zeroFieldR = this.zeroFieldR - 1;
-        this.steps = this.steps.concat("U ");
+        //this.steps.add(1);
     }
 
     public boolean canMoveUp(){
@@ -90,11 +104,11 @@ public class Board {
         setValue(this.zeroFieldR + 1, this.zeroFieldC, 0);
         setValue(this.zeroFieldR, this.zeroFieldC, downValue);
         this.zeroFieldR = this.zeroFieldR + 1;
-        this.steps = this.steps.concat("D ");
+        //this.steps.add(2);
     }
 
     public boolean canMoveDown() {
-        return zeroFieldR < this.board.size() - 1;
+        return zeroFieldR < this.board.length - 1;
     }
 
     public void moveLeft() {
@@ -102,7 +116,7 @@ public class Board {
         setValue(this.zeroFieldR, this.zeroFieldC - 1, 0);
         setValue(this.zeroFieldR, this.zeroFieldC, leftValue);
         this.zeroFieldC = this.zeroFieldC - 1;
-        this.steps = this.steps.concat("L ");
+        //this.steps.add(3);
     }
 
     public boolean canMoveLeft(){
@@ -114,30 +128,23 @@ public class Board {
         setValue(this.zeroFieldR, this.zeroFieldC + 1, 0);
         setValue(this.zeroFieldR, this.zeroFieldC, rightValue);
         this.zeroFieldC = this.zeroFieldC + 1;
-        this.steps = this.steps.concat("R ");
+        //this.steps.add(4);
     }
 
     public boolean canMoveRight(){
-        return zeroFieldC < this.board.get(0).size() - 1;
+        return zeroFieldC < this.board[0].length - 1;
     }
 
     @Override
     protected Board clone() {
-        List<List<Integer>> temp = new ArrayList<>();
-        for (int i = 0; i < this.board.size(); i++) {
-            temp.add(new ArrayList<>());
-        }
-
-        for (int r = 0; r < this.board.size(); r++) {
-            for (int c = 0; c < this.board.get(r).size(); c++) {
-                temp.get(r).add(this.board.get(r).get(c));
+        int[][] temp = new int[this.board.length][this.board[0].length];
+        for (int r = 0; r < this.board.length; r++) {
+            for (int c = 0; c < this.board[0].length; c++) {
+                temp[r][c] = this.board[r][c];
             }
         }
-
         Board clonedBoard = new Board(temp);
-
         clonedBoard.setSteps(this.steps);
-
         return clonedBoard;
     }
 
@@ -146,12 +153,12 @@ public class Board {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Board board1 = (Board) o;
-        return zeroFieldR == board1.zeroFieldR && zeroFieldC == board1.zeroFieldC && board.equals(board1.board) && steps.equals(board1.steps);
+        return zeroFieldR == board1.zeroFieldR && zeroFieldC == board1.zeroFieldC && Arrays.deepEquals(board, board1.board) && steps.equals(board1.steps);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(board, zeroFieldR, zeroFieldC, steps);
+        return Objects.hash(Arrays.deepHashCode(board), zeroFieldR, zeroFieldC, steps);
     }
 }
 

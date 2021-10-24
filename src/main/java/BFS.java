@@ -1,14 +1,17 @@
+import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.Queue;
 
 public class BFS {
-  private final Queue<Board> queue = new LinkedList<>();
+  private final LinkedList<Board> queue = new LinkedList<>();
+  private final HashSet<Board> visited = new HashSet<>();
 
   public Board  solveBoard(Board boardToSolve) {
       queue.add(boardToSolve);
+      visited.add(boardToSolve);
 
       while (!queue.isEmpty()) {
-          Board board = queue.poll();
+          Board board = queue.getFirst();
+          queue.removeLast();
 
           if (board.isSolved()) {
               return board;
@@ -17,22 +20,35 @@ public class BFS {
           if (board.canMoveUp()) {
               Board newBoard = board.clone();
               newBoard.moveUp();
-              queue.add(newBoard);
+              if (!visited.contains(newBoard))  {
+                  queue.add(newBoard);
+                  visited.add(newBoard);
+              }
+
           }
           if (board.canMoveDown()) {
               Board newBoard = board.clone();
               newBoard.moveDown();
-              queue.add(newBoard);
+              if (!visited.contains(newBoard))  {
+                  queue.add(newBoard);
+                  visited.add(newBoard);
+              }
           }
           if (board.canMoveLeft()) {
               Board newBoard = board.clone();
               newBoard.moveLeft();
-              queue.add(newBoard);
+              if (!visited.contains(newBoard))  {
+                  queue.add(newBoard);
+                  visited.add(newBoard);
+              }
           }
           if (board.canMoveRight()) {
               Board newBoard = board.clone();
               newBoard.moveRight();
-              queue.add(newBoard);
+              if (!visited.contains(newBoard))  {
+                  queue.add(newBoard);
+                  visited.add(newBoard);
+              }
           }
       }
       return null;
