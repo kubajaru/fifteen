@@ -6,12 +6,15 @@ public class Main {
         System.out.println("Enter number of rows and columns:");
         Scanner scan = new Scanner(System.in);
         String rowsAndColumns = scan.nextLine();
-        String [] splitRowsAndColumns;
-        splitRowsAndColumns=rowsAndColumns.split(" ");
+
+        String[] splitRowsAndColumns = rowsAndColumns.split(" ");
+
         int rows = Integer.parseInt(splitRowsAndColumns[0]);
         int columns = Integer.parseInt(splitRowsAndColumns[1]);
         int[][] temp = new int[rows][columns];
+
         System.out.println("Filling the table...");
+
         for (int i = 0; i < rows; i++) {
             temp[i] = getRow(columns);
         }
@@ -40,10 +43,11 @@ public class Main {
             default -> System.out.println("Incorrect choice!");
         }
     }
+
     private static int[] getRow(int columns) {
         Scanner scan = new Scanner(System.in);
         String row = scan.nextLine();
-        String [] splitNumbers;
+        String[] splitNumbers;
         splitNumbers = row.split(" ");
         int[] column = new int[columns];
         for (int i = 0; i < splitNumbers.length; i++) {
@@ -51,8 +55,4 @@ public class Main {
         }
         return column;
     }
-
-    // 1. Zmienic liste list na tablice - Done poza testami
-    // 2. Dodac do BFS visited list - Done
-    // 3. Zamienic queue i stack na linked list - DONE
 }

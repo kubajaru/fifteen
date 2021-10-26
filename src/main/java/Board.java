@@ -79,7 +79,7 @@ public class Board {
         return this.board;
     }
 
-    public Integer getValue(int r, int c) {
+    private Integer getValue(int r, int c) {
         return this.board[r][c];
     }
 
