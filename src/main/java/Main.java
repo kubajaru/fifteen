@@ -9,14 +9,14 @@ public class Main {
 
         String[] splitRowsAndColumns = rowsAndColumns.split(" ");
 
-        int rows = Integer.parseInt(splitRowsAndColumns[0]);
-        int columns = Integer.parseInt(splitRowsAndColumns[1]);
-        int[][] temp = new int[rows][columns];
+        int numberOfRows = Integer.parseInt(splitRowsAndColumns[0]);
+        int numberOfColumns = Integer.parseInt(splitRowsAndColumns[1]);
+        int[][] temp = new int[numberOfRows][numberOfColumns];
 
         System.out.println("Filling the table...");
 
-        for (int i = 0; i < rows; i++) {
-            temp[i] = getRow(columns);
+        for (int i = 0; i < numberOfRows; i++) {
+            temp[i] = getRow(numberOfColumns);
         }
         Board board = new Board(temp);
         board.printBoard();
@@ -44,15 +44,15 @@ public class Main {
         }
     }
 
-    private static int[] getRow(int columns) {
+    private static int[] getRow(int numberOfColumns) {
         Scanner scan = new Scanner(System.in);
-        String row = scan.nextLine();
+        String inputRow = scan.nextLine();
         String[] splitNumbers;
-        splitNumbers = row.split(" ");
-        int[] column = new int[columns];
+        splitNumbers = inputRow.split(" ");
+        int[] row = new int[numberOfColumns];
         for (int i = 0; i < splitNumbers.length; i++) {
-            column[i] = Integer.parseInt(splitNumbers[i]);
+            row[i] = Integer.parseInt(splitNumbers[i]);
         }
-        return column;
+        return row;
     }
 }
