@@ -2,7 +2,7 @@
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CloneNotSupportedException {
         System.out.println("Enter number of rows and columns:");
         Scanner scan = new Scanner(System.in);
         String rowsAndColumns = scan.nextLine();

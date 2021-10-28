@@ -158,7 +158,7 @@ class BoardTest {
     }
 
     @Test
-    void testClone() {
+    void testClone() throws CloneNotSupportedException {
         int[][] temp = new int[2][2];
 
         temp[0][0] = 2; temp[0][1] = 1;
