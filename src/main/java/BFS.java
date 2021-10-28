@@ -11,7 +11,7 @@ public class BFS {
 
       while (!queue.isEmpty()) {
           Board board = queue.getFirst();
-          queue.removeLast();
+          queue.removeFirst();
 
           if (board.isSolved()) {
               return board;
