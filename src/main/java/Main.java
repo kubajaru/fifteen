@@ -30,15 +30,24 @@ public class Main {
                 System.out.println("BFS");
                 BFS bfsSolver = new BFS();
                 Board solvedBoard = bfsSolver.solveBoard(board);
-                solvedBoard.printBoard();
-                System.out.println(solvedBoard.getSteps());
+                if (solvedBoard!=null)
+                {
+                    solvedBoard.printBoard();
+                    System.out.println(solvedBoard.getSteps());
+                }
+                else System.out.println("No solution");
+
             }
             case "2" -> {
                 System.out.println("DFS");
                 DFS dfsSolver = new DFS();
                 Board solvedBoard1 = dfsSolver.solveBoard(board);
-                solvedBoard1.printBoard();
-                System.out.println(solvedBoard1.getSteps());
+                if(solvedBoard1!=null)
+                {
+                    solvedBoard1.printBoard();
+                    System.out.println(solvedBoard1.getSteps());
+                }
+                else System.out.println("No solution");
             }
             default -> System.out.println("Incorrect choice!");
         }
