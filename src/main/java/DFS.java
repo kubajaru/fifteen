@@ -15,6 +15,7 @@ public class DFS {
             stack.removeLast();
 
             if (board.isSolved()) {
+                System.out.println("Nodes visited: " + visited.size());
                 return board;
             }
 

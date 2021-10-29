@@ -14,6 +14,7 @@ public class BFS {
           queue.removeFirst();
 
           if (board.isSolved()) {
+              System.out.println("Nodes visited: " + visited.size());
               return board;
           }
 
